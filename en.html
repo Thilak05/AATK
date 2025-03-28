@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="assets/stethoscope_7054620.png">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="assets/background-video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to the Telemedicine Kiosk</h1>
+            <h2>Click the button below to continue</h2>
+        </div>
+        <div class="button-wrapper">
+            <button class="cta-button" onclick="redirect()">User Authentication</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.querySelector(".container");
+            setTimeout(() => {
+                container.style.opacity = "1";
+                container.style.transform = "translateY(0)";
+            }, 100);
+        });
+        
+        function redirect() {
+            window.location.href = 'http://127.0.0.1:5000';
+        }
+    </script>
+</body>
+</html>

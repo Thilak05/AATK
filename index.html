@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="x-icon" href="assets/stethoscope_7054620.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .language-buttons {
+            display: grid;
+            grid-template-columns:16ch 16ch;
+            grid-gap: 30px;
+            justify-content: center;
+        }
+        .language-button {
+            background-color: #c2fbd7;
+            border-radius: 100px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+            color: green;
+            cursor: pointer;
+            display: inline-block;
+            font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+            padding: 7px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            font-size: 16px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        #bub{
+            grid-column: span 2;
+        }
+        .language-button:hover {
+            box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+            transform: scale(1.05) rotate(-1deg)
+        }
+        /* .logos{
+            display: grid;
+            justify-content: center;
+            grid-template-columns:12ch 12ch;
+            gap: 0px;
+        } */
+    </style>
+</head>
+<body>
+    <!-- <div class="logos">
+        <img class="logo" src="assets\cardiologist-7824663.jpg" alt="" style="height: 150px; width: 110px;">
+        <img  class="logo" src="assets\doctor-8032750.jpg" alt="" style="height: 150px; width: 100px;">
+    </div> -->
+    <div class="container">
+        <div class="title">Select your Preferred Language to Enter the Website</div>
+        <div class="language-buttons">
+            <button class="language-button" id="bub" onclick="redirectToLanguagePage('en')">English</button>
+            <button class="language-button" onclick="redirectToLanguagePage('hi')">हिन्दी</button>
+            <button class="language-button" onclick="redirectToLanguagePage('as')">অসমীয়া</button>
+            <button class="language-button" onclick="redirectToLanguagePage('bn')">বাংলা</button>
+            <button class="language-button" onclick="redirectToLanguagePage('kn')">ಕನ್ನಡ</button>
+            <button class="language-button" onclick="redirectToLanguagePage('gu')">ગુજરાતી</button>
+            <button class="language-button" onclick="redirectToLanguagePage('ml')">മലയാളം</button>
+            <button class="language-button" onclick="redirectToLanguagePage('mr')">मराठी</button>
+            <button class="language-button" onclick="redirectToLanguagePage('or')">ଓଡ଼ିଆ</button>
+            <button class="language-button" onclick="redirectToLanguagePage('pa')">ਪੰਜਾਬੀ</button>
+            <button class="language-button" onclick="redirectToLanguagePage('ta')">தமிழ்</button>
+            <button class="language-button" onclick="redirectToLanguagePage('te')">తెలుగు</button>
+            <button class="language-button" onclick="redirectToLanguagePage('ur')">اردو</button>
+        </div>
+    </div>
+    <script>
+        function redirectToLanguagePage(language) {
+            window.location.href = language + '.html';
+        }
+    </script>
+</body>
+</html>

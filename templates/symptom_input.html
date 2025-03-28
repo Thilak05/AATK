@@ -1,0 +1,207 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Input</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0056b3;
+            box-shadow: 0px 0px 8px rgba(0, 91, 187, 0.5);
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .redirect-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .redirect-btn:hover {
+            background: #1e7e34;
+            transform: scale(1.05);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 14px;
+            color: #007bff;
+            margin-top: 10px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Enter Your Symptoms</h1>
+
+    <div class="container">
+        <form id="symptom-form">
+            <div class="input-group">
+                <label for="symptoms">Symptoms:</label>
+                <input type="text" id="symptoms" name="symptoms" required placeholder="Enter symptoms...">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="redirect-btn" onclick="redirect()">Consult</button>
+            </div>
+        </form>
+
+        <p class="loading" id="loading">Processing...</p>
+
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <script>
+        document.querySelector("#symptom-form").onsubmit = async function(event) {
+            event.preventDefault();
+            const symptoms = document.querySelector("#symptoms").value;
+            const loadingText = document.querySelector("#loading");
+            const resultBox = document.querySelector("#result");
+
+            // Show loading effect
+            loadingText.style.display = "block";
+            resultBox.style.display = "none";
+
+            try {
+                const response = await fetch("/submit_symptoms", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({ symptoms })
+                });
+
+                const data = await response.json();
+
+                // Hide loading effect
+                loadingText.style.display = "none";
+
+                // Display result
+                resultBox.style.display = "block";
+                resultBox.innerHTML = `<strong>${data.recommended_treatment || data.error}</strong>`;
+            } catch (error) {
+                loadingText.style.display = "none";
+                resultBox.style.display = "block";
+                resultBox.innerHTML = `<strong style="color: red;">Error processing request</strong>`;
+                console.error("Error:", error);
+            }
+        };
+
+        function redirect() {
+            window.location.href = "https://sihtesting.netlify.app/";
+        }
+    </script>
+</body>
+</html>

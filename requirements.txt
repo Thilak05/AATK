@@ -1,0 +1,12 @@
+flask
+opencv-python
+opencv-contrib-python
+numpy
+pyzbar
+openpyxl
+firebase-admin
+python-dotenv
+cvzone
+mediapipe
+pillow
+google-generativeai
